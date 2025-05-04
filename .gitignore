@@ -30,5 +30,6 @@ build/
 !**/src/test/**/build/
 nb-configuration.xml
 nbactions-spring-boot.xml
+.mvn
 ### VS Code ###
 .vscode/
