@@ -44,40 +44,4 @@ public class BatchConfiguration {
 	        populator.execute(dataSource);
 	        return populator;
 	    }
-	
-	
-	@Bean
-        public Job jobScheduledOutput(JobRepository jobRepository, Step stepScheduledOutput) {
-            return new JobBuilder("jobScheduledOutput", jobRepository)
-                    .start(stepScheduledOutput)
-                    .build();
-        }
-
-        @Bean
-        public Step stepScheduledOutput(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-            return new StepBuilder("stepScheduledOutput", jobRepository)
-                            .allowStartIfComplete(true)
-                    .tasklet((StepContribution contribution, ChunkContext chunkContext) -> {
-                        log.info("BATCH run ::: JobScheduledOutput! :::");
-                        return RepeatStatus.FINISHED;
-                    }, transactionManager).build();
-        }
-        
-        @Bean
-        public Job jobScheduledOutput2(JobRepository jobRepository, Step stepScheduledOutput2) {
-            return new JobBuilder("jobScheduledOutput2", jobRepository)
-                    .start(stepScheduledOutput2)
-                    .build();
-        }
-
-        @Bean
-        public Step stepScheduledOutput2(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
-            return new StepBuilder("stepScheduledOutput2", jobRepository)
-                            .allowStartIfComplete(true)
-                    .tasklet((StepContribution contribution, ChunkContext chunkContext) -> {
-                        log.info("BATCH run ::: JobScheduledOutput2! :::");
-                        return RepeatStatus.FINISHED;
-                    }, transactionManager).build();
-        }
-
 }
