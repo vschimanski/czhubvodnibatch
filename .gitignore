@@ -13,7 +13,6 @@ target/
 .springBeans
 .sts4-cache
 .plugins
-.metadata
 
 ### IntelliJ IDEA ###
 .idea
@@ -33,6 +32,8 @@ build/
 nb-configuration.xml
 nbactions-spring-boot.xml
 .mvn
+
 ### VS Code ###
 .vscode/
 .gitattributes
+.metadata
