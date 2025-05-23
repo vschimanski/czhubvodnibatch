@@ -33,3 +33,4 @@ nbactions-spring-boot.xml
 .mvn
 ### VS Code ###
 .vscode/
+.gitattributes
