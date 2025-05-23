@@ -1,5 +1,6 @@
 package cz.hub.vodni.batch.config;
 
+import java.util.Arrays;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -10,8 +11,10 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
@@ -37,11 +40,27 @@ public class BatchConfiguration {
 	}
 
         
-	 @Bean
+	@Bean
 	 DatabasePopulator databasePopulator(DataSource dataSource) {
 	        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 	        populator.setContinueOnError(false);
 	        populator.execute(dataSource);
 	        return populator;
 	    }
+
+        @Bean
+	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+		return args -> {
+
+			log.info("Let's inspect the beans provided by Spring Boot:");
+
+			String[] beanNames = ctx.getBeanDefinitionNames();
+			Arrays.sort(beanNames);
+			for (String beanName : beanNames) {
+				log.info(beanName);
+			}
+
+		};
+	}
+
 }
