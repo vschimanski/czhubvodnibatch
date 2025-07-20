@@ -25,32 +25,28 @@ public class ScheduledTasks {
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-	//@Scheduled(fixedRate = 5000)
-	//public void reportCurrentTime() {
-		//log.info("The time is now : " + dateFormat.format(new Date()));
-	//}
-	
-	
-    @Autowired
-    private JobLauncher jobLauncher;
+	// @Scheduled(fixedRate = 5000)
+	// public void reportCurrentTime() {
+	// log.info("The time is now : " + dateFormat.format(new Date()));
+	// }
 
-    @Autowired
-    private Job jobScheduledOutput;
-    
-    @Autowired
-    private Job temperatureSensorJob;
+	@Autowired
+	private JobLauncher jobLauncher;
 
-    @Scheduled(cron = "0 */2 * * * *")
-	
-	public void scheduleMyBatchJob() throws JobParametersInvalidException,
-		JobExecutionAlreadyRunningException,
-		JobRestartException,
-		JobInstanceAlreadyCompleteException {
-			
-		JobParameters params = new JobParametersBuilder()
-				.addString("ID", UUID.randomUUID().toString()) .addLong("time", System.currentTimeMillis()).toJobParameters();
-					jobLauncher.run(jobScheduledOutput, params);
-					jobLauncher.run(temperatureSensorJob,
-					params);
-				}
+	@Autowired
+	private Job jobScheduledOutput;
+
+	@Autowired
+	private Job temperatureSensorJob;
+
+	@Scheduled(cron = "0 */2 * * * *")
+
+	public void scheduleMyBatchJob() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+			JobRestartException, JobInstanceAlreadyCompleteException {
+
+		JobParameters params = new JobParametersBuilder().addString("ID", UUID.randomUUID().toString())
+				.addLong("time", System.currentTimeMillis()).toJobParameters();
+		jobLauncher.run(jobScheduledOutput, params);
+		jobLauncher.run(temperatureSensorJob, params);
+	}
 }

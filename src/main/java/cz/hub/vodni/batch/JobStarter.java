@@ -17,72 +17,62 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Configuration
-class JobStarter { 
+class JobStarter {
 //implements ApplicationRunner {
 
-    @Autowired
-    private JobLauncher jobLauncher;
+	@Autowired
+	private JobLauncher jobLauncher;
 
-    @Autowired
-    private Job jobScheduledOutput;
-    
-    @Autowired
-    private Job temperatureSensorJob;
+	@Autowired
+	private Job jobScheduledOutput;
 
-    
-   // @Scheduled(cron = "0 */5 * * * ?")
-    //	public void runScheduledjob() throws Exception {
-    	//JobParameters params = new JobParametersBuilder()
-          //      .addString("ID", UUID.randomUUID().toString())
-            //    .addLong("time", System.currentTimeMillis())
-              //  .toJobParameters();
-           //jobLauncher.run(jobScheduledOutput, params);
-           
-          //JobParameters jobParameters = new JobParametersBuilder()
-            //       .addString("ID", UUID.randomUUID().toString())
-              //     .addLong("time", System.currentTimeMillis())
-                //   .toJobParameters();
-          //jobLauncher.run(temperatureSensorJob, params );    	
-    //}
-    
-    
-    
-    @Bean
-    CommandLineRunner runjobs() {
-      return (args) -> {
-    	  
-    	JobParameters params = new JobParametersBuilder()
-              .addString("ID", UUID.randomUUID().toString())
-               .addLong("time", System.currentTimeMillis())
-                .toJobParameters();
-           jobLauncher.run(jobScheduledOutput, params);
-           
-          JobParameters jobParameters = new JobParametersBuilder()
-                   .addString("ID", UUID.randomUUID().toString())
-                   .addLong("time", System.currentTimeMillis())
-                   .toJobParameters();
-           jobLauncher.run(temperatureSensorJob, jobParameters  );
+	@Autowired
+	private Job temperatureSensorJob;
 
-      };
-    }
-    
-    /*
-    @Override
-    
-    public void run(ApplicationArguments args) throws Exception {
-        
-   	 	JobParameters params = new JobParametersBuilder()
-             .addString("ID", UUID.randomUUID().toString())
-             .addLong("time", System.currentTimeMillis())
-             .toJobParameters();
-       // jobLauncher.run(jobScheduledOutput, params);
-        
-       //JobParameters jobParameters = new JobParametersBuilder()
-         //       .addString("ID", UUID.randomUUID().toString())
-           //     .addLong("time", System.currentTimeMillis())
-             //   .toJobParameters();
-        //jobLauncher.run(temperatureSensorJob, params );
-        
-    }
-    */
+	// @Scheduled(cron = "0 */5 * * * ?")
+	// public void runScheduledjob() throws Exception {
+	// JobParameters params = new JobParametersBuilder()
+	// .addString("ID", UUID.randomUUID().toString())
+	// .addLong("time", System.currentTimeMillis())
+	// .toJobParameters();
+	// jobLauncher.run(jobScheduledOutput, params);
+
+	// JobParameters jobParameters = new JobParametersBuilder()
+	// .addString("ID", UUID.randomUUID().toString())
+	// .addLong("time", System.currentTimeMillis())
+	// .toJobParameters();
+	// jobLauncher.run(temperatureSensorJob, params );
+	// }
+
+	@Bean
+	CommandLineRunner runjobs() {
+		return (args) -> {
+
+			JobParameters params = new JobParametersBuilder().addString("ID", UUID.randomUUID().toString())
+					.addLong("time", System.currentTimeMillis()).toJobParameters();
+			jobLauncher.run(jobScheduledOutput, params);
+
+			JobParameters jobParameters = new JobParametersBuilder().addString("ID", UUID.randomUUID().toString())
+					.addLong("time", System.currentTimeMillis()).toJobParameters();
+			jobLauncher.run(temperatureSensorJob, jobParameters);
+
+		};
+	}
+
+	/*
+	 * @Override
+	 * 
+	 * public void run(ApplicationArguments args) throws Exception {
+	 * 
+	 * JobParameters params = new JobParametersBuilder() .addString("ID",
+	 * UUID.randomUUID().toString()) .addLong("time", System.currentTimeMillis())
+	 * .toJobParameters(); // jobLauncher.run(jobScheduledOutput, params);
+	 * 
+	 * //JobParameters jobParameters = new JobParametersBuilder() //
+	 * .addString("ID", UUID.randomUUID().toString()) // .addLong("time",
+	 * System.currentTimeMillis()) // .toJobParameters();
+	 * //jobLauncher.run(temperatureSensorJob, params );
+	 * 
+	 * }
+	 */
 }
