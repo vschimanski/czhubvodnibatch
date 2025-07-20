@@ -14,17 +14,28 @@ import lombok.Setter;
 @Entity
 @Table(name = "invoice_data")
 @Data
-@NoArgsConstructor   
+@NoArgsConstructor
 @AllArgsConstructor
 public class Invoice {
-		   @Id
-		   @GeneratedValue(strategy = GenerationType.IDENTITY)
-		   private Long id;	   
-		   @Getter @Setter private String name;
-		   @Getter @Setter private String number;
-		   @Getter @Setter private Double amount;
-		   @Getter @Setter private Double discount;
-		   @Getter @Setter private Double finalAmount;
-		   @Getter @Setter private String location;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Getter
+	@Setter
+	private String name;
+	@Getter
+	@Setter
+	private String number;
+	@Getter
+	@Setter
+	private Double amount;
+	@Getter
+	@Setter
+	private Double discount;
+	@Getter
+	@Setter
+	private Double finalAmount;
+	@Getter
+	@Setter
+	private String location;
 }
-
