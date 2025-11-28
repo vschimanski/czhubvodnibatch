@@ -3,20 +3,20 @@ package cz.hub.vodni.batch.utils;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 
-public class InvoiceListener implements JobExecutionListener{
+public class InvoiceListener implements JobExecutionListener {
 
-    @Override
-    public void beforeJob(JobExecution jobExecution) {
+	@Override
+	public void beforeJob(JobExecution jobExecution) {
+		System.out.println("Job Name: " + jobExecution.getJobInstance().getJobName());
+		System.out.println("Job started at: " + jobExecution.getStartTime());
+		System.out.println("Status of the Job: " + jobExecution.getStatus());
+	}
 
-       System.out.println("Job started at: "+ jobExecution.getStartTime());
-       System.out.println("Status of the Job: "+jobExecution.getStatus());
-    }
+	@Override
+	public void afterJob(JobExecution jobExecution) {
 
-    @Override
-    public void afterJob(JobExecution jobExecution) {
-
-       System.out.println("Job Ended at: "+ jobExecution.getEndTime());
-       System.out.println("Status of the Job: "+jobExecution.getStatus());
-    }
+		System.out.println("Job Ended at: " + jobExecution.getEndTime());
+		System.out.println("Status of the Job: " + jobExecution.getStatus());
+	}
 
 }
